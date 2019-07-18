@@ -82,8 +82,9 @@ public class finalTest {
                 l.logAndPrintLine(e.getMessage());
             }catch (Exception ex){ex.printStackTrace();}
             finally {
+                driver.close();
                 try{l.finishWithoutLog();
-                driver.close();}catch (IOException exc){exc.printStackTrace();}
+                }catch (IOException exc){exc.printStackTrace();}
             }
         }catch (Exception e){e.printStackTrace();}
     }
