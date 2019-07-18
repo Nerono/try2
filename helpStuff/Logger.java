@@ -10,6 +10,8 @@ public class Logger implements AutoCloseable{
     BufferedWriter bw;
     private static String path ="D:\\TestLog\\log.txt";
 
+    public static String getPath(){return path;}
+
     public static String getCurrentTimeStamp() {
         SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//dd/MM/yyyy
         Date now = new Date();

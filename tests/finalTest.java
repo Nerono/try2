@@ -18,7 +18,7 @@ public class finalTest {
         poDressSearch dressSearch;
         WebDriver driver=null;
         try(Logger l = new Logger()){
-
+            System.out.println("Logs save in: " + Logger.getPath());
             l.startLog();
             l.logLine("Trying set property...");
             System.setProperty("webdriver.chrome.driver","D:\\chromedriver\\chromedriver.exe");
