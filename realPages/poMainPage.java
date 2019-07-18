@@ -8,6 +8,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import testProg.helpStuff.BasicPage;
 
 public class poMainPage extends BasicPage{
+    private String quote = "dress";
 
     String mainPageUrl = "http://prestashop-automation.qatestlab.com.ua/ru/";
 
@@ -24,7 +25,7 @@ public class poMainPage extends BasicPage{
 
     //Осуществляет поиск слова "dress" в поисковом окне.
     public poDressSearch dressSearch(){
-        driver.findElement(searchLocator).sendKeys("dress");
+        driver.findElement(searchLocator).sendKeys(quote);
         driver.findElement(searchLocator).submit();
         return new poDressSearch(driver);
     }

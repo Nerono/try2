@@ -15,7 +15,6 @@ import java.util.List;
 //
 public class BasicPage {
 
-    //NoSuchElementException myException = new NoSuchElementException("Top panel not displayed");
     protected WebDriver driver;
 
     public static final int USD = 0;

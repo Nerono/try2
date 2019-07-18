@@ -16,6 +16,7 @@ public class finalTest {
     public static void main(String[] args) {
         poMainPage mainPage;
         poDressSearch dressSearch;
+        WebDriver driver=null;
         try(Logger l = new Logger()){
 
             l.startLog();
@@ -24,7 +25,7 @@ public class finalTest {
             l.logSucces();
 
             l.logLine("Trying create webdriver and call get()...");
-            WebDriver driver = new ChromeDriver();
+            driver = new ChromeDriver();
             driver.manage().window().maximize();
             driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
             driver.get("http://prestashop-automation.qatestlab.com.ua/ru/");
@@ -79,12 +80,11 @@ public class finalTest {
                 l = new Logger();
                 l.logAndPrintLine("Forced closure(NoSuchElementException) cause:");
                 l.logAndPrintLine(e.getMessage());
-            }catch (Exception ex){ex.printStackTrace();}finally {
-                try{l.finishWithoutLog();}catch (IOException exc){exc.printStackTrace();}
+            }catch (Exception ex){ex.printStackTrace();}
+            finally {
+                try{l.finishWithoutLog();
+                driver.close();}catch (IOException exc){exc.printStackTrace();}
             }
-
-
-
         }catch (Exception e){e.printStackTrace();}
     }
 
