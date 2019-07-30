@@ -1,13 +1,14 @@
-package testProg.helpStuff;
+package testprog.helpstuff;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Logger implements AutoCloseable{
     BufferedWriter bw;
+    StringWriter sw;
+    PrintWriter pw;
+    String stackTrace;
     private static String path ="D:\\TestLog\\log.txt";
 
     public static String getPath(){return path;}
@@ -22,6 +23,8 @@ public class Logger implements AutoCloseable{
     public Logger(){
         try {
             bw = new BufferedWriter(new FileWriter(path,true));
+            sw = new StringWriter();
+            pw = new PrintWriter(sw);
         }catch (IOException e){e.printStackTrace();}
     }
 
@@ -41,21 +44,38 @@ public class Logger implements AutoCloseable{
         bw.write(s);
         System.out.println(s);
     }
+    public void logAndPrintExcLine(Exception e)throws IOException{
+        e.printStackTrace(pw);
+        stackTrace = sw.toString();
+        pw.flush();
+        sw.getBuffer().setLength(0);
+        logAndPrintLine(stackTrace);
+    }
     public void logSucces()throws IOException{
         bw.newLine();
-        bw.write("#Succes.");
+        bw.write("#Succes");
+    }
+    public void logFailure()throws IOException{
+        bw.newLine();
+        bw.write("#Failure");
     }
     public void finishLog() throws IOException{
         bw.newLine();
         bw.write("######## FINISH ########");
         bw.close();
+        pw.close();
+        sw.close();
     }
     public void finishWithoutLog() throws IOException{
         bw.close();
+        pw.close();
+        sw.close();
     }
 
     @Override
-    public void close() throws Exception {
-        finishLog();
+    public void close()  {
+        try {
+            finishLog();
+        }catch (IOException e){e.printStackTrace();}
     }
 }
